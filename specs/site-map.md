@@ -9,8 +9,6 @@
  - /version-history
  - /contact-us (no specification)
 
------
-
 ## Distinct views that are not standalone pages but notable
  - /404-not-found
  - /403-forbidden
