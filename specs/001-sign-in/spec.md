@@ -23,9 +23,9 @@ defined in its own spec:
 
 | Spec | Mode | Summary |
 |------|------|---------|
-| 002 (planned) | `hardware-token` | User presents a hardware token (client certificate) directly to the app |
-| 003 (planned) | `hardware-token-proxy` | A trusted reverse proxy verifies the token and passes the identity to the app |
-| 004 (planned) | `identity-provider` | User signs in at the organization's identity provider |
+| [002](../002-sign-in-hardware-token/spec.md) | `hardware-token` | User presents a hardware token (client certificate) directly to the app |
+| [003](../003-sign-in-hardware-token-proxy/spec.md) | `hardware-token-proxy` | A trusted reverse proxy verifies the token and passes the identity to the app |
+| [004](../004-sign-in-identity-provider/spec.md) (TBD) | `identity-provider` | User signs in at the organization's identity provider |
 
 ## Goals
 - Exactly one sign-in mode is active per deployment, set in deployment
