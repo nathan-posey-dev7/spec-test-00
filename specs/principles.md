@@ -35,6 +35,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - Timestamps should be checked for DateTime default values and dissallowed.
 - On delete cascade type behavior should generally be avoided.
 - Favor soft-delete type behavior over permanent deletion.
+- The source of truth for database schemas should live in the repository.
 
 ## Quality bars
 - Accessibility: WCAG 2.2 AA.
@@ -48,6 +49,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - All configuration and secrets come from the environment, never source control.
 - Structured logs with a request/correlation ID; no secrets or sensitive data in logs (see 013).
 - Every feature should be testable automatically; manual-only checks are the exception and must be noted.
+- Releases should check for schema drift on every release through automated commands.
 
 ## Integration
 - Known systems we may integrate with: TBD (e.g. HR system, ERP, email, data warehouse).
