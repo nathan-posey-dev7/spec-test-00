@@ -15,3 +15,4 @@ to cover:
   text for 005's Signed out page
 - Token and signing-key validation, clock skew, key rotation
 - Behaviour when the identity provider is unavailable (001 AC-16)
+- Consider automatically updating the user information with the information from the identity provider (Maybe they should be prompted first? Maybe it should be stored separately?)
