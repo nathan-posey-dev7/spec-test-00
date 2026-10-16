@@ -6,9 +6,10 @@ should not loosen them without a decision record in `specs/decisions/`.
 Mark items `TBD` until decided; replace with concrete values as they are.
 
 ## Users & access
-- Users are internal staff; authentication is via the organization's
-  identity provider (SSO). Provider/protocol: TBD (e.g. OIDC, SAML).
-- No local passwords stored by the application.
+- Users are internal staff. Exactly one sign-in mode is active per
+  deployment: hardware token, hardware token via reverse proxy, or the
+  organization's identity provider. See spec 001.
+- No passwords: the application never asks for or stores them.
 - Authorization is role-based. Roles are defined centrally (see below) and
   every feature spec must state which roles can do what.
 - Deny by default: a new endpoint or screen is inaccessible until a role is

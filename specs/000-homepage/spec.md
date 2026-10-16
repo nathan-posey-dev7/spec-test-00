@@ -21,8 +21,7 @@ they don't hit dead ends or see features they have no access to.
 - Establish the pattern later features use to add themselves to the homepage.
 
 ## Non-goals
-- Building the sign-in mechanism itself (SSO integration). This spec only
-  links to it; see `principles.md` and a future decision record.
+- Building the sign-in mechanism itself. This spec only links to it; see spec 001.
 - Role management screens.
 - Dashboards, metrics, notifications or other dynamic content on the homepage.
 - Visual design or branding beyond a clean, accessible layout.
@@ -106,8 +105,7 @@ replaced as features are specified.
   optional description, link), or the empty-state message from AC-7.
 
 ## Integrations
-- Organization identity provider (via the sign-in flow): provides the
-  user's identity, display name and role membership.
+- The sign-in flow (001): provides the user's identity, display name and roles.
 
 ## Non-functional requirements
 - None beyond `principles.md`.
@@ -122,7 +120,7 @@ replaced as features are specified.
 
 ## Open questions
 - [ ] What should the explanation text say? Who writes or approves it? (owner TBD, not blocking)
-- [ ] Is "Sign out" in scope for this spec, or a separate one? (blocking AC-4 layout)
+- [x] Is "Sign out" in scope for this spec, or a separate one? → Defined in 001; the homepage shows the control when signed in.
 - [ ] Where do roles come from: identity provider groups/claims, or managed in this app? (blocking plan)
 - [ ] Does visibility work per role (as written) or through finer-grained permissions mapped to roles? (blocking plan)
 - [ ] What should the empty-state message (AC-7) say about requesting access: a contact, a link, or a ticketing system? (not blocking)
