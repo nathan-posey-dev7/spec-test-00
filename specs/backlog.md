@@ -10,3 +10,5 @@ Ideas and cross-cutting concerns not yet ready for a spec.
 - **Email.** Not yet specified: what the app sends (e.g. access request
   updates, inactivity warnings from 008), how, and from where. Whatever is
   decided, every attempted email must be logged (013 AC-6).
+
+- **Other Status Codes** How should other status codes like 400 Bad Request be handled?
