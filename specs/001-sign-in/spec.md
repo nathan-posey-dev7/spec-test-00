@@ -18,7 +18,7 @@ rules differing more than necessary between deployments.
 ## Scope of this spec
 This spec defines what is **common to every sign-in mode**: how a mode is
 chosen, the sign-in page, what a successful sign-in produces, sessions,
-sign-out, failures and audit. How each mode actually verifies a user is
+failures and audit. Sign-out is defined in [005](../005-sign-out/spec.md). How each mode actually verifies a user is
 defined in its own spec:
 
 | Spec | Mode | Summary |
@@ -34,7 +34,7 @@ defined in its own spec:
   identity, a display name and roles.
 - The app fails closed: misconfiguration prevents it from starting rather
   than leaving it open or half-secured.
-- Sign-in, sign-out and session behaviour look and work the same regardless of mode.
+- Sign-in and session behaviour look and work the same regardless of mode.
 
 ## Non-goals
 - Password-based sign-in, in any mode, ever.
@@ -44,13 +44,14 @@ defined in its own spec:
   means changing deployment configuration and redeploying or restarting.
 - A default mode. If nothing is configured, nothing is active.
 - Mode-specific verification details (see 002–004).
+- Sign-out (see 005).
 - Role management screens.
 
 ## Users & roles
 | Role | Can do |
 |------|--------|
 | Not signed in | Reach the sign-in page and the not-signed-in homepage (000) only |
-| Any signed-in user | Sign out |
+| Any signed-in user | Sign out (005) |
 | Operator (deploys the app) | Set the active mode and its settings in deployment configuration |
 | Admin (in the app) | Nothing related to the mode: they can't see secrets or change it |
 
@@ -59,7 +60,7 @@ defined in its own spec:
   organization requires, so I can use the application.
 - **US-2:** As a member of staff, I want to return to the page I was trying to
   reach after signing in, so I don't lose my place.
-- **US-3:** As a signed-in user, I want to sign out, so nobody else can use my session.
+- **US-3:** _Moved to 005 (sign-out)._
 - **US-4:** As an operator, I want to set exactly one sign-in mode in the
   deployment's configuration, and have the app refuse to start if that
   configuration is wrong, so a deployment can't accidentally be insecure.
@@ -122,14 +123,9 @@ See "Mode configuration" under Business rules for where the setting comes from.
   <behaviour TBD: denied with a "no access" message, or signed in with no
   roles and shown the 000 empty state>.
 
-### Sessions & sign-out
-- **AC-11 (US-3):** Given I am signed in, when I choose "Sign out", then my
-  session ends, I see the not-signed-in homepage, and using the browser's
-  back button doesn't show protected content.
-- **AC-12 (US-3):** Given the active mode has its own session outside the
-  application (for example, at the identity provider), when I sign out,
-  then the mode spec defines whether that session is also ended, and the
-  sign-out confirmation says so honestly.
+### Sessions
+- **AC-11:** _Moved to 005 (sign-out)._
+- **AC-12:** _Moved to 005 (sign-out)._
 - **AC-13:** Given my session has been idle for longer than the idle timeout
   or has reached its maximum lifetime, when I next make a request, then I am
   treated as not signed in.
@@ -193,8 +189,7 @@ See "Mode configuration" under Business rules for where the setting comes from.
 
 ## Screens / interactions
 - **Sign-in page:** app name, one mode-specific action, area for failure messages.
-- **Signed-in pages:** a "Sign out" control available everywhere (000 shows it on the homepage).
-- **Signed out:** the not-signed-in homepage (000), optionally with a "You have signed out" note.
+- **Signed-in pages and Signed out page:** see 005.
 
 ## Integrations
 - Depends on the active mode: hardware token infrastructure (certificate

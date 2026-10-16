@@ -120,7 +120,7 @@ replaced as features are specified.
 
 ## Open questions
 - [ ] What should the explanation text say? Who writes or approves it? (owner TBD, not blocking)
-- [x] Is "Sign out" in scope for this spec, or a separate one? → Defined in 001; the homepage shows the control when signed in.
+- [x] Is "Sign out" in scope for this spec, or a separate one? → Defined in 005; the homepage shows the control when signed in.
 - [ ] Where do roles come from: identity provider groups/claims, or managed in this app? (blocking plan)
 - [ ] Does visibility work per role (as written) or through finer-grained permissions mapped to roles? (blocking plan)
 - [ ] What should the empty-state message (AC-7) say about requesting access: a contact, a link, or a ticketing system? (not blocking)

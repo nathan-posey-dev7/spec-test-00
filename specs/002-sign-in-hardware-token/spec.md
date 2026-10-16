@@ -6,8 +6,8 @@
 - **Last updated:** 2026-10-16
 - **Depends on:** 001 (shared sign-in behaviour)
 
-> Only what's specific to this mode. Everything else (sessions, sign-out,
-> return-to, failures, audit) follows 001.
+> Only what's specific to this mode. Everything else (sessions, return-to,
+> failures, audit) follows 001; sign-out follows 005.
 
 ## Problem
 Some deployments require staff to sign in with a hardware token holding a
@@ -51,12 +51,8 @@ certificate itself.
 - **AC-6 (US-1):** Given my certificate is valid, when I sign in, then my
   stable identifier and display name are taken from the configured
   certificate fields (see Business rules).
-- **AC-7:** Given I signed out, when I return to the homepage, then I am not
-  signed back in automatically, even though my browser may still offer my
-  certificate; I have to select "Sign in" again.
-- **AC-8:** Given I signed out, when the sign-out confirmation is shown, then
-  it tells me to remove my token or close the browser to fully end use of my
-  certificate (001 AC-12).
+- **AC-7:** _Moved to 005 (sign-out) AC-7._
+- **AC-8:** _Moved to 005 (sign-out) AC-3; this mode's guidance is listed there._
 - **AC-9:** Given I am signed in, when a later request presents a different
   certificate identity, then my session ends and I am treated as not signed in.
 - **AC-10:** Given this mode is active, when the app starts without trusted

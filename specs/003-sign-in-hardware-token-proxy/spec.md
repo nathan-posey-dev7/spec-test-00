@@ -6,8 +6,8 @@
 - **Last updated:** 2026-10-16
 - **Depends on:** 001 (shared sign-in behaviour), 002 (certificate rules)
 
-> Only what's specific to this mode. Everything else (sessions, sign-out,
-> return-to, failures, audit) follows 001.
+> Only what's specific to this mode. Everything else (sessions, return-to,
+> failures, audit) follows 001; sign-out follows 005.
 
 ## Problem
 Some deployments put a reverse proxy in front of the app that handles TLS
@@ -55,12 +55,8 @@ could sign in as anyone.
 - **AC-6:** Given I am signed in, when a request arrives from the proxy with a
   different identity, or with none, then my session ends and the request
   is treated accordingly (re-sign-in as the new identity, or not signed in).
-- **AC-7:** Given I signed out, when I return to the homepage, then I am not
-  signed back in automatically until I select "Sign in", even though the
-  proxy still forwards my identity.
-- **AC-8:** Given I signed out, when the sign-out confirmation is shown, then
-  it tells me to remove my token or close the browser to fully end use of my
-  certificate (001 AC-12).
+- **AC-7:** _Moved to 005 (sign-out) AC-7._
+- **AC-8:** _Moved to 005 (sign-out) AC-3; this mode's guidance is listed there._
 - **AC-9:** Given this mode is active, when the app starts without a trust
   mechanism for the proxy or without the identity header settings, then it
   refuses to start (001 AC-2).
