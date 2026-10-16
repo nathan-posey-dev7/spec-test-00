@@ -9,6 +9,7 @@ a specific tool. Plain Markdown and a simple loop:
 CLAUDE.md                 # workflow rules for AI assistants
 specs/
   principles.md           # project-wide rules (auth, data, quality bars)
+  backlog.md              # ideas and concerns not yet ready for a spec
   decisions/              # numbered decision records (stack, hosting, …)
   _templates/             # spec.md, plan.md, tasks.md, decision.md
   NNN-feature-name/       # one folder per feature
