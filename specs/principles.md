@@ -32,6 +32,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - All timestamps should be UTC
 - All strings should be trimmed before saving.
 - All whitespace strings should be converted to null before saving.
+- Timestamps should be checked for DateTime default values and dissallowed.
 
 ## Quality bars
 - Accessibility: WCAG 2.2 AA.
