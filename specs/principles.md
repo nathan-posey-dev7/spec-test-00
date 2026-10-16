@@ -30,6 +30,8 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - Retention and deletion rules: TBD.
 - Changes to business records are audit-logged: who, what, when, before/after.
 - All timestamps should be UTC
+- All strings should be trimmed before saving.
+- All whitespace strings should be converted to null before saving.
 
 ## Quality bars
 - Accessibility: WCAG 2.2 AA.
