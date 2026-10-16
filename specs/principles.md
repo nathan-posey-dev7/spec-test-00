@@ -33,6 +33,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - All strings should be trimmed before saving.
 - All whitespace strings should be converted to null before saving.
 - Timestamps should be checked for DateTime default values and dissallowed.
+- On delete cascade type behavior should generally be avoided.
 
 ## Quality bars
 - Accessibility: WCAG 2.2 AA.
