@@ -12,6 +12,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - No passwords: the application never asks for or stores them.
 - Authorization is role-based. Roles are defined centrally (see below) and
   every feature spec must state which roles can do what.
+- The only way to be granted access is an approved access request (007).
 - Deny by default: a new endpoint or screen is inaccessible until a role is
   explicitly granted.
 

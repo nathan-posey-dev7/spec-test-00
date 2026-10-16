@@ -48,7 +48,7 @@ they don't hit dead ends or see features they have no access to.
 ## Acceptance criteria
 - **AC-1 (US-1):** Given I am not signed in, when I open the homepage, then I
   see the application name, a brief explanation of its purpose (no more than
-  a short paragraph), and a "Sign in" link.
+  a short paragraph), a "Sign in" link, and a "Request access" link (007).
 - **AC-2 (US-1):** Given I am not signed in, when I select "Sign in", then I
   am taken to the sign-in page.
 - **AC-3 (US-1):** Given I am not signed in, when I view the homepage
