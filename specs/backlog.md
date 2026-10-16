@@ -11,4 +11,4 @@ Ideas and cross-cutting concerns not yet ready for a spec.
   updates, inactivity warnings from 008), how, and from where. Whatever is
   decided, every attempted email must be logged (013 AC-6).
 
-- **Other Status Codes** How should other status codes like 400 Bad Request be handled?
+- **Other Status Codes** How should other status codes like 400 Bad Request be handled? Probably conditionally, if empty show something, if from a bad form validation show those errors...
