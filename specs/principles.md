@@ -40,7 +40,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 ## Operations
 - Environments: dev, test/staging, production (TBD).
 - All configuration and secrets come from the environment, never source control.
-- Structured logs with a request/correlation ID; no secrets or sensitive data in logs.
+- Structured logs with a request/correlation ID; no secrets or sensitive data in logs (see 013).
 - Every feature should be testable automatically; manual-only checks are the exception and must be noted.
 
 ## Integration
