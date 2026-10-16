@@ -20,6 +20,7 @@ dashboards, alerting.
 | **Telemetry** (minimal) | Page loaded, response status, duration | 010–012 |
 | **Sign-in** | Sign-in success/failure **with the active mode**, sign-out, session expiry, refused locked account | 001 AC-17, 005, 008 |
 | **System action** | Things the app does by itself: startup (with mode and config source), shutdown, account locked for inactivity | 001 AC-1, 008 |
+| **Email** | Every attempt to send an email, successful or not | Backlog (email not yet specified) |
 
 ## Acceptance criteria
 - **AC-1:** Every event in the table above is logged with at least: time,
@@ -32,9 +33,13 @@ dashboards, alerting.
 - **AC-4:** Sign-in events always record the active sign-in mode.
 - **AC-5:** Telemetry records which page was loaded (path, not query
   string), its status code and how long it took, and nothing more.
+- **AC-6:** Every attempted email is logged with its purpose (e.g. which
+  kind of notification), recipient, and outcome (sent, failed, refused),
+  but never its body.
 
 ## Open questions
 - [ ] Where do logs go, in what format, and for how long? (blocking plan)
 - [ ] If logging fails, should the app keep running or stop (some audit rules require stopping)? (blocking plan)
 - [ ] Is "system actions" also meant to cover changes users make to data (business audit, per `principles.md`)? (not blocking)
 - [ ] Should telemetry be per user or anonymous? (not blocking)
+- [ ] Email recipient: log the address, or only the user's stable identifier where there is one? (not blocking)
