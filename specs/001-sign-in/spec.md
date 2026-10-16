@@ -9,10 +9,12 @@
 
 ## Problem
 The application is deployed into environments with different authentication
-infrastructure. Some require staff to sign in with a hardware token, either
-directly or through a reverse proxy that handles the token, and others use
-the organization's identity provider. The app has to support all three
-without weakening any of them, and without the user experience or security
+infrastructure. Some:
+ - Require staff to sign in with a hardware token directly.
+ - Go through a reverse proxy that handles the token.
+ - Others use the organization's identity provider.
+ 
+The app has to support all three without weakening any of them, and without the user experience or security
 rules differing more than necessary between deployments.
 
 ## Scope of this spec
@@ -37,12 +39,13 @@ defined in its own spec:
 - Sign-in and session behaviour look and work the same regardless of mode.
 
 ## Non-goals
-- Password-based sign-in, in any mode, ever.
-- Running more than one mode at the same time, or letting users choose a mode.
+- The app should remain passwordless entirely in all modes.
+- The app should not run more than one mode at the same time.
+- The app should not be letting users choose a mode.
 - Choosing or changing the mode from inside the running app (admin
   screen, API, database setting, feature flag service). Changing the mode
   means changing deployment configuration and redeploying or restarting.
-- A default mode. If nothing is configured, nothing is active.
+- No default mode. If nothing is configured, nothing is active.
 - Mode-specific verification details (see 002–004).
 - Sign-out (see 005).
 - Role management screens.
