@@ -29,6 +29,7 @@ Mark items `TBD` until decided; replace with concrete values as they are.
 - Personal data is minimized; specs must justify any personal data collected.
 - Retention and deletion rules: TBD.
 - Changes to business records are audit-logged: who, what, when, before/after.
+- All timestamps should be UTC
 
 ## Quality bars
 - Accessibility: WCAG 2.2 AA.
