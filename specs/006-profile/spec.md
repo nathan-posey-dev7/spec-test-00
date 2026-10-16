@@ -13,6 +13,11 @@ have, so they can't tell why something is or isn't available.
 A read-only page showing the signed-in user's own details.
 **Not included:** editing anything, viewing other users' profiles, preferences.
 
+## Considerations
+ - Have a primary details tab
+ - A tab for permissions
+ - A tab for login history
+
 ## Acceptance criteria
 - **AC-1:** Given I am signed in, when I choose "Profile" (in the header, next
   to "Sign out"), then I see my display name, stable identifier, email (if
