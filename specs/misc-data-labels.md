@@ -4,9 +4,9 @@
 - CreatedAtUtc (nonullable)
 - UpdatedByUserId (nullable)
 - UpdatedAtUtc (nullable)
-- IsDeleted (nonullable default false)
 - DeletedByUserId (nullable)
 - DeletedAtUtc (nullable)
+- IsDeleted (nonullable default false)
 
 ### With the following checks
  - Appropriate foreign key constraints
