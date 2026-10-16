@@ -28,7 +28,8 @@ defined in its own spec:
 | 004 (planned) | `identity-provider` | User signs in at the organization's identity provider |
 
 ## Goals
-- Exactly one sign-in mode is active per deployment, chosen by configuration.
+- Exactly one sign-in mode is active per deployment, set in deployment
+  configuration when the app is deployed, and fixed for as long as it runs.
 - Every mode results in the same thing: a signed-in user with a stable
   identity, a display name and roles.
 - The app fails closed: misconfiguration prevents it from starting rather
@@ -38,7 +39,10 @@ defined in its own spec:
 ## Non-goals
 - Password-based sign-in, in any mode, ever.
 - Running more than one mode at the same time, or letting users choose a mode.
-- Switching modes at runtime without a restart/redeploy.
+- Choosing or changing the mode from inside the running app (admin
+  screen, API, database setting, feature flag service). Changing the mode
+  means changing deployment configuration and redeploying or restarting.
+- A default mode. If nothing is configured, nothing is active.
 - Mode-specific verification details (see 002–004).
 - Role management screens.
 
@@ -47,7 +51,8 @@ defined in its own spec:
 |------|--------|
 | Not signed in | Reach the sign-in page and the not-signed-in homepage (000) only |
 | Any signed-in user | Sign out |
-| Operator (deploys the app) | Choose and configure the active mode |
+| Operator (deploys the app) | Set the active mode and its settings in deployment configuration |
+| Admin (in the app) | Nothing related to the mode: they can't see secrets or change it |
 
 ## User stories
 - **US-1:** As a member of staff, I want to sign in using the method my
@@ -55,22 +60,35 @@ defined in its own spec:
 - **US-2:** As a member of staff, I want to return to the page I was trying to
   reach after signing in, so I don't lose my place.
 - **US-3:** As a signed-in user, I want to sign out, so nobody else can use my session.
-- **US-4:** As an operator, I want to choose exactly one sign-in mode in
-  configuration and have the app refuse to start if that configuration is
-  wrong, so a deployment can't accidentally be insecure.
+- **US-4:** As an operator, I want to set exactly one sign-in mode in the
+  deployment's configuration, and have the app refuse to start if that
+  configuration is wrong, so a deployment can't accidentally be insecure.
+- **US-6:** As a security reviewer, I want the sign-in mode to be decided
+  only by deployment configuration, so nobody using the running app can
+  weaken how users are verified.
 - **US-5:** As a security reviewer, I want sign-in activity recorded, so I can
   investigate suspicious access.
 
 ## Acceptance criteria
 
 ### Mode selection
-- **AC-1 (US-4):** Given configuration names exactly one valid mode with all
-  its required settings, when the app starts, then that mode is active and
-  the startup log states which mode it is.
-- **AC-2 (US-4):** Given configuration names no mode, more than one mode, an
-  unknown mode, or is missing a setting the chosen mode requires, when the
+See "Mode configuration" under Business rules for where the setting comes from.
+- **AC-1 (US-4):** Given deployment configuration sets exactly one valid mode
+  with all its required settings, when the app starts, then that mode is
+  active and the startup log states which mode it is and which source
+  (configuration file or deployment environment) it came from.
+- **AC-2 (US-4):** Given deployment configuration sets no mode, more than one
+  mode, an unknown mode, sets different modes in the configuration file and
+  the deployment environment, or is missing a setting the chosen mode requires, when the
   app starts, then it refuses to start and logs a clear reason, without
   logging any secrets.
+- **AC-2a (US-6):** Given the app is running, when anyone changes the
+  configuration file or anything else, then the active mode stays the same
+  until the app is restarted or redeployed. Nothing in the app's UI, API or
+  database can change it.
+- **AC-2b (US-6):** Given the app is running, when an admin or user looks
+  for sign-in settings in the app, then there is no way to see or change the
+  mode's secrets (keys, client secrets, proxy shared secrets).
 - **AC-3 (US-4):** Given a mode is active, when a request uses a sign-in
   method belonging to a different mode (for example, identity headers sent
   as if from a reverse proxy while the `hardware-token` mode is active),
@@ -137,6 +155,25 @@ defined in its own spec:
 ## Business rules & validation
 - Sign-in modes (names are configuration values):
   `hardware-token`, `hardware-token-proxy`, `identity-provider`.
+
+### Mode configuration
+- The mode is a single setting, provisionally named `auth.mode`, read
+  **once at startup**. It is part of deployment configuration, and comes from
+  either:
+  - the app's **configuration file** that ships with or is mounted into the
+    deployment, or
+  - the **deployment environment** (for example an environment variable such
+    as `AUTH_MODE`, set by the deployment tooling).
+- If both sources set it, they must agree; if they disagree the app refuses
+  to start (AC-2). Neither silently overrides the other.
+- Each mode's own settings (certificate authorities, proxy address, identity
+  provider details) live under that mode's section, for example
+  `auth.hardware_token.*`. Settings for modes that aren't active are ignored,
+  and their presence is logged as a warning.
+- Secrets used by a mode come from the deployment's secret mechanism, never
+  from the configuration file in source control (per `principles.md`).
+- Exact file format, key names and environment variable names are decided
+  in the plan, once the stack is chosen.
 - Every mode must give the shared sign-in logic either a **verified identity**
   or a **failure with a reason category**. A verified identity has:
   - a stable unique identifier
@@ -172,7 +209,10 @@ defined in its own spec:
 - A user's roles change while they're signed in: takes effect at the latest
   on their next sign-in, unless a mode spec says it can be sooner.
 - The same user is signed in on two devices: allowed, sessions are independent (TBD).
-- Configuration is changed while the app is running: ignored until restart.
+- Configuration is changed while the app is running: ignored until restart (AC-2a).
+- Several instances of the app run behind a load balancer with different
+  modes configured by mistake: TBD; at minimum, each logs its mode at startup
+  so the mismatch is visible.
 
 ## Open questions
 - [ ] "Hardware token": X.509 client certificate on a smart card (e.g. PIV/CAC), FIDO2/WebAuthn security keys, or both? This spec assumes client certificates, which is what makes the reverse-proxy mode meaningful. (blocking 002/003)
